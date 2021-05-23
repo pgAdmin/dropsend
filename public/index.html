@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dropsend.dev | Send files between devices securely w/o a server</title>
+  <style type="text/css">
+    #one_drop_section_lol {
+      display: none;
+    }
+    #drop_party_section {
+      display: none;
+    }
+    #drop_zone {
+      border: 5px solid blue;
+      width:  500px;
+      height: 300px;
+    }
+  </style>
+  <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+</head>
+<body onLoad="initiatePeerConnection()">
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+
+  <button id="one_drop" onclick="selectMode(0)">One Drop</button>
+  <button id="drop_party" onclick="selectMode(1)">Drop Party</button>
+  <input type="text" id="receive_from">
+  <button id="receive_party" onclick="checkAppState()">Receive Party</button>
+
+  <div id="one_drop_section">
+    <header>One Drop Section</header> 
+    <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+      <p>Drag a file to this Drop Zone</p>
+      <div></div>
+    </div>
+  </div>
+  <div id="drop_party_section">Drop Party Section</div>
+</body>
+</html>
