@@ -4,7 +4,13 @@ var setDisplayState = (selector, value) => {
 
 var onAppLoad = () => {
   initiatePeerConnection();
-  document.querySelector("#receive_from").value = window.location.search.substr(1)
+  if (window.location.search.substr(1)) {
+    document.querySelector("#receive_from").value = window.location.search.substr(1)
+    document.querySelector("#drop_zone").style.display = "none";
+  } else {
+    document.querySelector("#receive_from").style.display = "none";
+    document.querySelector("#receive_btn").style.display = "none";
+  }
 };
 
 var initiatePeerConnection = () => {
