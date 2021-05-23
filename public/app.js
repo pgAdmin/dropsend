@@ -70,7 +70,16 @@ async function dropHandler(ev) {
         window.fileBuffer = bufferData;
         document.querySelector("#drop_zone > p").innerText = '... file[' + i + '].name = ' + file.name;
         var downloadLink = window.location.origin + '/?'+window.currentPeerId
-        document.querySelector("#drop_zone > div").innerHTML = '<a href="' + downloadLink + '">Download From: ' + downloadLink;
+        // document.querySelector("#drop_zone #link").innerHTML = '<a href="' + downloadLink + '">Download From: ' + downloadLink + '</a>';
+        document.querySelector("#drop_zone #link").innerHTML = 'Scan to Download';
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+          text: downloadLink,
+          width: 160,
+          height: 160,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
       }
     }
   } else {
