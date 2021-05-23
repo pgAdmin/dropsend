@@ -2,9 +2,14 @@ var setDisplayState = (selector, value) => {
   document.querySelector(selector).style.display = value;
 };
 
+var onAppLoad = () => {
+  initiatePeerConnection();
+  document.querySelector("#receive_from").value = window.location.search.substr(1)
+};
+
 var initiatePeerConnection = () => {
   window.currentPeerId = Date.now().toString();
-  window.myPeer = new Peer(window.currentPeerId, { host: 'localhost', port: 9000, path: '/myapp' });
+  window.myPeer = new Peer(window.currentPeerId, { host: 'dropsend-peer-5mwucnzwyq-uc.a.run.app', port: 443, path: '/myapp' });
   window.myPeer.on('connection', function(conn) {
     conn.on('open', function() {
       conn.send({
@@ -64,7 +69,8 @@ async function dropHandler(ev) {
         var bufferData = await file.arrayBuffer();
         window.fileBuffer = bufferData;
         document.querySelector("#drop_zone > p").innerText = '... file[' + i + '].name = ' + file.name;
-        document.querySelector("#drop_zone > div").innerText = 'My peer id: ' + window.currentPeerId;
+        var downloadLink = window.location.origin + '/?'+window.currentPeerId
+        document.querySelector("#drop_zone > div").innerHTML = '<a href="' + downloadLink + '">Download From: ' + downloadLink;
       }
     }
   } else {
