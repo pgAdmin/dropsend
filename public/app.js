@@ -8,7 +8,7 @@ var onAppLoad = () => {
 };
 
 var initiatePeerConnection = () => {
-  window.currentPeerId = Date.now().toString();
+  window.currentPeerId = (Date.now()  % 1000000 ).toString();
   window.myPeer = new Peer(window.currentPeerId, { host: 'dropsend-peer-5mwucnzwyq-uc.a.run.app', port: 443, path: '/myapp' });
   window.myPeer.on('connection', function(conn) {
     conn.on('open', function() {
